@@ -36,12 +36,12 @@ export default Navbar;
 // styles
 
 const Container = styled.div`
-    height: 30px;
   `
 const Wrapper = styled.div`
-    padding: 10px 20px;
+    padding: 0.625em 1.25rem;
     display: flex;
     justify-content:space-between;
+    align-items: center;
     
     `
 
@@ -58,8 +58,8 @@ const SearchContainer = styled.div`
     border: 1px solid lightgray;
     display:flex;
     cursor:pointer;
-    padding: 5px;
-    margin-left:10px;
+    padding: 0.3225em;
+    margin-left:0.625em;
 `
 const Input = styled.input`
      border: none;
@@ -73,17 +73,18 @@ const Center = styled.div`
 `
 const Logo = styled.h1`
         text-align:center;
+        font-size: 3em;
     
     `
 const Right = styled.div`
     flex: 1;
-    font-size:16px;
+    font-size:1rem;
     display:flex;
     align-items:center;
     justify-content:end
 
 `
 const MenuItem = styled.div`
-        margin-left:20px;
+        margin-left:1.25em;
         cursor:pointer;
 `

@@ -13,9 +13,10 @@ export default Announcement;
 
 const Container = styled.div`
     height: 30px;
-    background: purple;
+    background: #845EC2;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: .875rem;
 `
