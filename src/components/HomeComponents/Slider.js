@@ -4,32 +4,44 @@ import styled from 'styled-components';
 import { sliderItems } from '../../data';
 
 const Slider = () => {
-    const [slideIndex, setSlideIndex] = useState(0);
+    let [slideIndex, setSlideIndex] = useState(0);
     let [delay, setDelay] = useState(5000);
+    let [count, setCount] = useState(0);
 
-        useEffect(()=>{
-            setTimeout(() => {
+    // slider timer function
+
+    useEffect(() => {
+        setCount(count+1);
+        if (count < 6) {
+            const timer = setTimeout(() => {
                 if (slideIndex < 2) {
-                    setSlideIndex(slideIndex+1);
-                    setDelay(delay+200);
-                    console.log(`delay:${delay}, index:${slideIndex}`);
-                } else if (slideIndex===2){
+                    setSlideIndex(slideIndex + 1);
+                    if (delay > 5000) {
+                        setDelay(delay - (delay - 5000));
+                    } else {
+                        setDelay(delay + 200);
+                    }
+
+                } else if (slideIndex === 2 || count>5) {
                     setSlideIndex(0);
-                    setDelay(delay-400)
-                    console.log(`delay:${delay}, index:${slideIndex}`);
+                    if (delay > 5000) {
+                        setDelay(delay - (delay - 5000));
+                    } else {
+                        setDelay(delay + 200);
+                    }
                 }
-    
-            },delay);
-        },[delay])
+            }, delay);
+            return () => clearTimeout(timer);
+        }
+    }, [delay]);
+
+    // onclick slide funtion
 
     const handleClick = (direction) => {
         if (direction === "left") {
-            window.preventDefault();
             setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
-            setDelay(5000);
         } else {
             setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-            setDelay(5000);
         }
     };
     return (
