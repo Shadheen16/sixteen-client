@@ -1,15 +1,35 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { sliderItems } from '../../data';
 
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
+    let [delay, setDelay] = useState(5000);
+
+        useEffect(()=>{
+            setTimeout(() => {
+                if (slideIndex < 2) {
+                    setSlideIndex(slideIndex+1);
+                    setDelay(delay+200);
+                    console.log(`delay:${delay}, index:${slideIndex}`);
+                } else if (slideIndex===2){
+                    setSlideIndex(0);
+                    setDelay(delay-400)
+                    console.log(`delay:${delay}, index:${slideIndex}`);
+                }
+    
+            },delay);
+        },[delay])
+
     const handleClick = (direction) => {
         if (direction === "left") {
+            window.preventDefault();
             setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+            setDelay(5000);
         } else {
             setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+            setDelay(5000);
         }
     };
     return (
@@ -79,8 +99,9 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
-    transition: all 1.5s ease;
+    scroll-behavior: smooth;
     transform: translateX(${(props) => props.slideIndex * -100}vw);
+    transition: all 1.5s .2s ease; 
 `;
 const Slide = styled.div`
     width: 100vw;
